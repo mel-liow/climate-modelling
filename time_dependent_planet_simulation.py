@@ -11,8 +11,6 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import itertools as it
-from collections import namedtuple
 
 
 def temperature_timeseries(temp=0, heat=0, time=0, step=50, water_depth=4000, solar_constant=1350, albedo=0.3, epsilon=1, sigma=5.67E-8, specific_heat=4.2e3, density=997):
