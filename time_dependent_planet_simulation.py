@@ -63,9 +63,6 @@ if __name__ == '__main__':
     steps = read_input('# of half centuries: ', 25)
 
     gen = temperature_timeseries()
-    data = []
-    for i in range(0, steps):
-        data.append(list(next(gen)))
-
+    data = [list(next(gen)) for _ in range(steps)]
     plot_planet_evolution(data)
     plt.show()
