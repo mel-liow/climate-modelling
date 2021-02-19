@@ -18,7 +18,7 @@ import math
 ncol = 5
 nrow = ncol
 
-nSlices = 1000					# maximum number of frames to show in the plot
+nSlices = 1000				# maximum number of frames to show in the plot
 ntAnim = 1						# number of time steps for each frame
 
 horizontalWrap = True 
@@ -28,18 +28,18 @@ plotOutput = True
 arrowScale = 30
 rotationScheme = "PlusMinus"	# "WithLatitude", "PlusMinus", "Uniform"
 
-windScheme = ""					# "Curled", "Uniform"
+windScheme = ""								# "Curled", "Uniform"
 initialPerturbation = "Tower"	# "Tower", "NSGradient", "EWGradient"
 
-dT = 600						# seconds
-G = 9.8e-4						# artificially low to allow a long time step
-HBackground = 4000				# meters
+dT = 600											# seconds
+G = 9.8e-4										# artificially low to allow a long time step
+HBackground = 4000						# meters
 
-dX = 1.E4						# meters, small ocean on a small low-G planet.  
+dX = 1.E4											# meters, small ocean on a small low-G planet.  
 dY = dX
 
 dxDegrees = dX / 110.e3
-flowConst = G					# 1/s2
+flowConst = G						# 1/s2
 dragConst = 1.E-6				# about 10 days decay time
 meanLatitude = 30				# degrees
 
@@ -49,7 +49,7 @@ windU = []
 for irow in range(0,nrow):
 	if rotationScheme is "WithLatitude":
 		latitude.append( meanLatitude + (irow - nrow/2) * dxDegrees )
-		rotConst.append( -7.e-5 * math.sin(math.radians(latitude[-1]))) 		# s-1
+		rotConst.append( -7.e-5 * math.sin(math.radians(latitude[-1]))) 				# s-1
 	elif rotationScheme is "PlusMinus":
 		rotConst.append( -3.5e-5 * (1. - 0.8 * ( irow - (nrow-1)/2 ) / nrow ))	# rot 50%
 	elif rotationScheme is "Uniform":
@@ -87,11 +87,11 @@ tempV = np.zeros((nrow, ncol))
     
 midCell = int(ncol/2)
 if initialPerturbation is "Tower":
-    H[midCell,midCell] = 1
+	H[midCell,midCell] = 1
 elif initialPerturbation is "NSGradient":
-    H[0:midCell,:] = 0.1
+	H[0:midCell,:] = 0.1
 elif initialPerturbation is "EWGradient":
-    H[:,0:midCell] = 0.1
+	H[:,0:midCell] = 0.1
 
 def animStep():    
 

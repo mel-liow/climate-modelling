@@ -8,13 +8,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Predefined constants
-epsilon = 1 					# Planet is assumed to be a black body
-sigma = 5.67E-8					# Stafan-Boltzman constant (W/m^2K^4)
-albedo_gradient = -0.01   		# Gradient of albedo-temperature relationship (K-1)
+epsilon = 1 							# Planet is assumed to be a black body
+sigma = 5.67E-8						# Stafan-Boltzman constant (W/m^2K^4)
+albedo_gradient = -0.01   # Gradient of albedo-temperature relationship (K-1)
 albedo_intercept = 2.8
 
 # Predefined ranges for L and albedo
-L_range = [1100, 1400]			# Range of solar constant
+L_range = [1100, 1400]		# Range of solar constant
 albedo_range = [0.15, 0.65]
 albedo = albedo_range[0]
 

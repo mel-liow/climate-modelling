@@ -16,13 +16,13 @@ import math
 
 # Predefined constants
 time_range = [1900, 2100]		# years
-time_step = 1					# years
+time_step = 1								# years
 n = int((time_range[1] - time_range[0]) / time_step)	# number of data values
 
-eq_CO2 = 280					# equilibrium CO2
-i_CO2 = 290						# initial CO2
+eq_CO2 = 280								# equilibrium CO2
+i_CO2 = 290									# initial CO2
 
-growth_rate = 0.0225 			# rate that gives an atmospheric rise of 2.5ppm when the pCO2 = 400ppm
+growth_rate = 0.0225 				# rate that gives an atmospheric rise of 2.5ppm when the pCO2 = 400ppm
 drawdown_rate = 0.01
 
 watts_m2_2x = 4.0               # radiative forcing in Watts/m2 for doubling CO2
@@ -30,7 +30,7 @@ climate_sensitivity_2x = 5.9    # temperature change per Watts/m2 of forcing
 climate_sensitivity_watts_m2 = climate_sensitivity_2x / watts_m2_2x
 t_response_time = 20
 
-rf_aero_now = -1.5 				# aerosol radiative forcing at present
+rf_aero_now = -1.5 					# aerosol radiative forcing at present
 
 # Initialising lists
 p_CO2 = np.zeros(n)
