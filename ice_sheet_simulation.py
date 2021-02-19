@@ -29,21 +29,21 @@ ax = fig.add_subplot(1,1,1)
 
 # Loop through time
 for i in range(0, nYears, timeStep):
-	for ix in range(0, nX+1):
-		surface_gradient = ( elevations[ix] - elevations[ix+1] ) / dX
-		flows[ix] = surface_gradient * flowParam  * ( elevations[ix]+elevations[ix+1] ) / 2 / dX
+    for ix in range(0, nX+1):
+        surface_gradient = ( elevations[ix] - elevations[ix+1] ) / dX
+        flows[ix] = surface_gradient * flowParam  * ( elevations[ix]+elevations[ix+1] ) / 2 / dX
 
-	for ix in range(1, nX+1):
-		elevations[ix]  = elevations[ix] + ( snowFall + flows[ix-1] - flows[ix] ) * timeStep
+    for ix in range(1, nX+1):
+        elevations[ix]  = elevations[ix] + ( snowFall + flows[ix-1] - flows[ix] ) * timeStep
 
 
-	print ("Years:", i)
-	ax.clear()			# to update graph
-	ax.plot(elevations)
-	plt.title('1D Ice Sheet Model')
-	plt.ylim(0,plotLimit)
-	plt.show(block=False)
-	plt.pause(0.001)			# delay between update
+    print ("Years:", i)
+    ax.clear()			# to update graph
+    ax.plot(elevations)
+    plt.title('1D Ice Sheet Model')
+    plt.ylim(0,plotLimit)
+    plt.show(block=False)
+    plt.pause(0.001)			# delay between update
 
 ax.clear()
 ax.plot( elevations )

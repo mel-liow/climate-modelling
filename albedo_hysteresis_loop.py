@@ -30,38 +30,38 @@ L = L_range[1]
 n = 30
 
 while L >= L_range[0]:
-	for i in range(0, n):
-		temp = ((L * ( 1 - albedo ) ) / (4 * sigma)) ** 0.25
-		albedo = albedo_gradient * temp + albedo_intercept
-		albedo = min(albedo, albedo_range[1])
-		albedo = max(albedo, albedo_range[0])
-		if plotType is "iterDown":
-			x.append(i)
-			y.append(temp)
-	if plotType == 'L':	
-		x.append(L)
-		y.append(temp)
-	if plotType == 'iterDown':
-		x.append(np.nan)
-		y.append(np.nan)
-	L -= 10
+    for i in range(0, n):
+        temp = ((L * ( 1 - albedo ) ) / (4 * sigma)) ** 0.25
+        albedo = albedo_gradient * temp + albedo_intercept
+        albedo = min(albedo, albedo_range[1])
+        albedo = max(albedo, albedo_range[0])
+        if plotType is "iterDown":
+            x.append(i)
+            y.append(temp)
+    if plotType == 'L':	
+        x.append(L)
+        y.append(temp)
+    if plotType == 'iterDown':
+        x.append(np.nan)
+        y.append(np.nan)
+    L -= 10
 
 while L <= L_range[1]:
-	for i in range(0, n):
-		temp = ((L * ( 1 - albedo ) ) / (4 * sigma)) ** 0.25
-		albedo = albedo_gradient * temp + albedo_intercept
-		albedo = min(albedo, 0.65)
-		albedo = max(albedo, 0.15)
-		if plotType is "iterUp":
-			x.append(i)
-			y.append(temp)
-	if plotType == 'L':	
-		x.append(L)
-		y.append(temp)
-	if plotType == 'iterUp':
-		x.append(np.nan)
-		y.append(np.nan)
-	L += 10
+    for i in range(0, n):
+        temp = ((L * ( 1 - albedo ) ) / (4 * sigma)) ** 0.25
+        albedo = albedo_gradient * temp + albedo_intercept
+        albedo = min(albedo, 0.65)
+        albedo = max(albedo, 0.15)
+        if plotType is "iterUp":
+            x.append(i)
+            y.append(temp)
+    if plotType == 'L':	
+        x.append(L)
+        y.append(temp)
+    if plotType == 'iterUp':
+        x.append(np.nan)
+        y.append(np.nan)
+    L += 10
 
 
 # Plot Graph
@@ -69,16 +69,16 @@ plt.plot( x, y )
 plt.title('Albedo Hysterisis Loop')
 
 if plotType == 'L':
-	plt.xlabel('Solar Constant (W m-2)')
-	plt.ylabel('Steady State Temperature (K)')
-	plt.title('Albedo Hysterisis Loop')
+    plt.xlabel('Solar Constant (W m-2)')
+    plt.ylabel('Steady State Temperature (K)')
+    plt.title('Albedo Hysterisis Loop')
 
 if plotType == 'iterDown':
-	plt.xlabel('Iteration Number')
-	plt.ylabel('Temperature (K)')
+    plt.xlabel('Iteration Number')
+    plt.ylabel('Temperature (K)')
     
 if plotType == 'iterUp':
-	plt.xlabel('Iteration Number')
-	plt.ylabel('Temperature (K)')
+    plt.xlabel('Iteration Number')
+    plt.ylabel('Temperature (K)')
 
 plt.show( )

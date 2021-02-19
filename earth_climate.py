@@ -49,18 +49,18 @@ years = np.arange(time_range[0], time_range[1])
 # Loop through time
 # A business as usual world
 for i in range(1, len(years)):
-	p_CO2[i] = eq_CO2 + (p_CO2[i-1] - eq_CO2) * (1 + growth_rate * time_step)
-	p_change[i] = (p_CO2[i] - p_CO2[i-1]) / time_step
-	rf_CO2[i] =  watts_m2_2x * np.log(p_CO2[i] / eq_CO2) / np.log(2)
+    p_CO2[i] = eq_CO2 + (p_CO2[i-1] - eq_CO2) * (1 + growth_rate * time_step)
+    p_change[i] = (p_CO2[i] - p_CO2[i-1]) / time_step
+    rf_CO2[i] =  watts_m2_2x * np.log(p_CO2[i] / eq_CO2) / np.log(2)
 
 iYear = years.tolist().index(2015)
 aerosol_masking_factor = rf_aero_now / (p_CO2[iYear] - p_CO2[iYear - 1]) / time_step
 
 for i in range(1, len(years)):
-	rf_masked[i] = max(p_change[i] * aerosol_masking_factor, rf_aero_now)
-	rf_total[i] = rf_masked[i] + rf_CO2[i]
-	T_eq[i] = rf_total[i] * climate_sensitivity_watts_m2
-	T_transient[i] = T_transient[i-1] + (T_eq[i] - T_transient[i-1]) * time_step/t_response_time
+    rf_masked[i] = max(p_change[i] * aerosol_masking_factor, rf_aero_now)
+    rf_total[i] = rf_masked[i] + rf_CO2[i]
+    T_eq[i] = rf_total[i] * climate_sensitivity_watts_m2
+    T_transient[i] = T_transient[i-1] + (T_eq[i] - T_transient[i-1]) * time_step/t_response_time
 
 # A world without humans
 p_CO2_rampdown = np.zeros(n)
@@ -77,11 +77,11 @@ T_transient_rampdown = np.zeros(n)
 T_transient_rampdown[0:iYear] = T_transient[0:iYear]
 
 for i in range(iYear, len(years)):
-	p_CO2_rampdown[i] = p_CO2_rampdown[i-1] + (eq_CO2 * 1.2 - p_CO2_rampdown[i-1]) * (drawdown_rate * time_step)
-	rf_CO2_rampdown[i] = watts_m2_2x * np.log(p_CO2_rampdown[i]/eq_CO2) / np.log(2)
-	rf_total_rampdown[i] = rf_CO2_rampdown[i]
-	T_eq_rampdown[i] = rf_total_rampdown[i] * climate_sensitivity_watts_m2
-	T_transient_rampdown[i] = T_transient_rampdown[i-1] + (T_eq_rampdown[i] - T_transient_rampdown[i-1]) * time_step / t_response_time
+    p_CO2_rampdown[i] = p_CO2_rampdown[i-1] + (eq_CO2 * 1.2 - p_CO2_rampdown[i-1]) * (drawdown_rate * time_step)
+    rf_CO2_rampdown[i] = watts_m2_2x * np.log(p_CO2_rampdown[i]/eq_CO2) / np.log(2)
+    rf_total_rampdown[i] = rf_CO2_rampdown[i]
+    T_eq_rampdown[i] = rf_total_rampdown[i] * climate_sensitivity_watts_m2
+    T_transient_rampdown[i] = T_transient_rampdown[i-1] + (T_eq_rampdown[i] - T_transient_rampdown[i-1]) * time_step / t_response_time
 
 
 print(T_transient[iYear], T_transient_rampdown[iYear])
