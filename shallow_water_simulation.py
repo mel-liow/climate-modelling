@@ -18,30 +18,30 @@ import math
 ncol = 5
 nrow = ncol
 
-nSlices = 1000				# maximum number of frames to show in the plot
-ntAnim = 1						# number of time steps for each frame
+nSlices = 1000			# maximum number of frames to show in the plot
+ntAnim = 1			# number of time steps for each frame
 
 horizontalWrap = True 
-interpolateRotation = False		# or True, either works
+interpolateRotation = False			# or True, either works
 textOutput = False
 plotOutput = True
 arrowScale = 30
-rotationScheme = "PlusMinus"	# "WithLatitude", "PlusMinus", "Uniform"
+rotationScheme = "PlusMinus"			# "WithLatitude", "PlusMinus", "Uniform"
 
-windScheme = ""								# "Curled", "Uniform"
-initialPerturbation = "Tower"	# "Tower", "NSGradient", "EWGradient"
+windScheme = ""			# "Curled", "Uniform"
+initialPerturbation = "Tower"			# "Tower", "NSGradient", "EWGradient"
 
-dT = 600											# seconds
-G = 9.8e-4										# artificially low to allow a long time step
-HBackground = 4000						# meters
+dT = 600			# seconds
+G = 9.8e-4			# artificially low to allow a long time step
+HBackground = 4000			# meters
 
-dX = 1.E4											# meters, small ocean on a small low-G planet.  
+dX = 1.E4			# meters, small ocean on a small low-G planet.  
 dY = dX
 
 dxDegrees = dX / 110.e3
-flowConst = G						# 1/s2
-dragConst = 1.E-6				# about 10 days decay time
-meanLatitude = 30				# degrees
+flowConst = G			# 1/s2
+dragConst = 1.E-6			# about 10 days decay time
+meanLatitude = 30			# degrees
 
 latitude = []
 rotConst = []
@@ -49,9 +49,9 @@ windU = []
 for irow in range(0,nrow):
 	if rotationScheme is "WithLatitude":
 		latitude.append( meanLatitude + (irow - nrow/2) * dxDegrees )
-		rotConst.append( -7.e-5 * math.sin(math.radians(latitude[-1]))) 				# s-1
+		rotConst.append( -7.e-5 * math.sin(math.radians(latitude[-1])))
 	elif rotationScheme is "PlusMinus":
-		rotConst.append( -3.5e-5 * (1. - 0.8 * ( irow - (nrow-1)/2 ) / nrow ))	# rot 50%
+		rotConst.append( -3.5e-5 * (1. - 0.8 * ( irow - (nrow-1)/2 ) / nrow ))
 	elif rotationScheme is "Uniform":
 		rotConst.append( -3.5e-5 ) 
 	else:
