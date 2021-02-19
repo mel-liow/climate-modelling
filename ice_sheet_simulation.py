@@ -9,12 +9,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Predefined constants
-nX = 10                # number of grid points
-domainWidth = 1e6      # meters
-timeStep = 100         # years
-nYears = 20000         # years
-flowParam = 1e4        # m horizontal / yr
-snowFall = 1         # m / y
+nX = 10					# number of grid points
+domainWidth = 1e6		# meters
+timeStep = 100			# years
+nYears = 20000			# years
+flowParam = 1e4			# m horizontal / yr
+snowFall = 1			# m / y
 plotLimit = 4000
 
 nSteps = int(nYears / timeStep)
@@ -39,12 +39,12 @@ for i in range(0, nYears, timeStep):
 
 
 	print ("Years:", i)
-	ax.clear() 	#to update graph
+	ax.clear() 			# to update graph
 	ax.plot(elevations)
 	plt.title('1D Ice Sheet Model')
 	plt.ylim(0,plotLimit)
 	plt.show(block=False)
-	plt.pause(0.001) #delay between update
+	plt.pause(0.001) 	# delay between update
 
 ax.clear()
 ax.plot( elevations )

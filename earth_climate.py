@@ -15,14 +15,14 @@ from matplotlib.legend_handler import HandlerLine2D
 import math
 
 # Predefined constants
-time_range = [1900, 2100]   # years
-time_step = 1			    # years
-n = int((time_range[1] - time_range[0]) / time_step)    # number of data values
+time_range = [1900, 2100]		# years
+time_step = 1					# years
+n = int((time_range[1] - time_range[0]) / time_step)	# number of data values
 
-eq_CO2 = 280		# equilibrium CO2
-i_CO2 = 290			# initial CO2
+eq_CO2 = 280					# equilibrium CO2
+i_CO2 = 290						# initial CO2
 
-growth_rate = 0.0225 # rate that gives an atmospheric rise of 2.5ppm when the pCO2 = 400ppm
+growth_rate = 0.0225 			# rate that gives an atmospheric rise of 2.5ppm when the pCO2 = 400ppm
 drawdown_rate = 0.01
 
 watts_m2_2x = 4.0               # radiative forcing in Watts/m2 for doubling CO2
@@ -30,7 +30,7 @@ climate_sensitivity_2x = 5.9    # temperature change per Watts/m2 of forcing
 climate_sensitivity_watts_m2 = climate_sensitivity_2x / watts_m2_2x
 t_response_time = 20
 
-rf_aero_now = -1.5 # aerosol radiative forcing at present
+rf_aero_now = -1.5 				# aerosol radiative forcing at present
 
 # Initialising lists
 p_CO2 = np.zeros(n)
@@ -77,16 +77,14 @@ T_transient_rampdown = np.zeros(n)
 T_transient_rampdown[0:iYear] = T_transient[0:iYear]
 
 for i in range(iYear, len(years)):
-  p_CO2_rampdown[i] = p_CO2_rampdown[i-1] + (eq_CO2 * 1.2 - p_CO2_rampdown[i-1]) * (drawdown_rate * time_step)
-  rf_CO2_rampdown[i] = watts_m2_2x * np.log(p_CO2_rampdown[i]/eq_CO2) / np.log(2)
-  rf_total_rampdown[i] = rf_CO2_rampdown[i]
-  T_eq_rampdown[i] = rf_total_rampdown[i] * climate_sensitivity_watts_m2
-  T_transient_rampdown[i] = T_transient_rampdown[i-1] + (T_eq_rampdown[i] - T_transient_rampdown[i-1]) * time_step / t_response_time
+	p_CO2_rampdown[i] = p_CO2_rampdown[i-1] + (eq_CO2 * 1.2 - p_CO2_rampdown[i-1]) * (drawdown_rate * time_step)
+	rf_CO2_rampdown[i] = watts_m2_2x * np.log(p_CO2_rampdown[i]/eq_CO2) / np.log(2)
+	rf_total_rampdown[i] = rf_CO2_rampdown[i]
+	T_eq_rampdown[i] = rf_total_rampdown[i] * climate_sensitivity_watts_m2
+	T_transient_rampdown[i] = T_transient_rampdown[i-1] + (T_eq_rampdown[i] - T_transient_rampdown[i-1]) * time_step / t_response_time
 
 
 print(T_transient[iYear], T_transient_rampdown[iYear])
-# print(T_transient[iYear+10], T_transient_rampdown[iYear+10])
-
 
 # Plot Graph
 line1,=plt.plot(years,T_transient,label="Busines-as-usual")

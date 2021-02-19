@@ -18,51 +18,51 @@ import math
 ncol = 5
 nrow = ncol
 
-nSlices = 1000         # maximum number of frames to show in the plot
-ntAnim = 1          # number of time steps for each frame
+nSlices = 1000					# maximum number of frames to show in the plot
+ntAnim = 1						# number of time steps for each frame
 
 horizontalWrap = True 
-interpolateRotation = False  			# or True, either works
+interpolateRotation = False		# or True, either works
 textOutput = False
 plotOutput = True
 arrowScale = 30
-rotationScheme = "PlusMinus"   		# "WithLatitude", "PlusMinus", "Uniform"
+rotationScheme = "PlusMinus"	# "WithLatitude", "PlusMinus", "Uniform"
 
-windScheme = ""  									# "Curled", "Uniform"
-initialPerturbation = "Tower"    	# "Tower", "NSGradient", "EWGradient"
+windScheme = ""					# "Curled", "Uniform"
+initialPerturbation = "Tower"	# "Tower", "NSGradient", "EWGradient"
 
-dT = 600    											# seconds
-G = 9.8e-4  											# artificially low to allow a long time step
-HBackground = 4000 								# meters
+dT = 600						# seconds
+G = 9.8e-4						# artificially low to allow a long time step
+HBackground = 4000				# meters
 
-dX = 1.E4 												# meters, small ocean on a small low-G planet.  
+dX = 1.E4						# meters, small ocean on a small low-G planet.  
 dY = dX
 
 dxDegrees = dX / 110.e3
-flowConst = G  										# 1/s2
-dragConst = 1.E-6  								# about 10 days decay time
-meanLatitude = 30 								# degrees
+flowConst = G					# 1/s2
+dragConst = 1.E-6				# about 10 days decay time
+meanLatitude = 30				# degrees
 
 latitude = []
 rotConst = []
 windU = []
 for irow in range(0,nrow):
 	if rotationScheme is "WithLatitude":
-			latitude.append( meanLatitude + (irow - nrow/2) * dxDegrees )
-			rotConst.append( -7.e-5 * math.sin(math.radians(latitude[-1]))) # s-1
+		latitude.append( meanLatitude + (irow - nrow/2) * dxDegrees )
+		rotConst.append( -7.e-5 * math.sin(math.radians(latitude[-1]))) 		# s-1
 	elif rotationScheme is "PlusMinus":
-			rotConst.append( -3.5e-5 * (1. - 0.8 * ( irow - (nrow-1)/2 ) / nrow )) # rot 50% +-
+		rotConst.append( -3.5e-5 * (1. - 0.8 * ( irow - (nrow-1)/2 ) / nrow ))	# rot 50%
 	elif rotationScheme is "Uniform":
-			rotConst.append( -3.5e-5 ) 
+		rotConst.append( -3.5e-5 ) 
 	else:
-			rotConst.append( 0 )
+		rotConst.append( 0 )
 
 	if windScheme is "Curled":
-			windU.append( 1e-8 * math.sin( (irow+0.5)/nrow * 2 * 3.14 ) ) 
+		windU.append( 1e-8 * math.sin( (irow+0.5)/nrow * 2 * 3.14 ) ) 
 	elif windScheme is "Uniform":
-			windU.append( 1.e-8 )
+		windU.append( 1.e-8 )
 	else:
-			windU.append( 0 )
+		windU.append( 0 )
 
 itGlobal = 0
 
@@ -168,18 +168,18 @@ def plotArrows():
 	uu = []
 	vv = []
 	for irow in range( 0, nrow ):
-			for icol in range( 0, ncol ):
-					xx.append(icol - 0.5)
-					yy.append(irow )
-					uu.append( U[irow,icol] * arrowScale )
-					vv.append( 0 )
+		for icol in range( 0, ncol ):
+			xx.append(icol - 0.5)
+			yy.append(irow )
+			uu.append( U[irow,icol] * arrowScale )
+			vv.append( 0 )
 	quiv = ax.quiver( xx, yy, uu, vv, color='white', scale=1)
 	for irow in range( 0, nrow ):
-			for icol in range( 0, ncol ):
-					xx.append(icol)
-					yy.append(irow - 0.5)
-					uu.append( 0 )
-					vv.append( -V[irow,icol] * arrowScale )
+		for icol in range( 0, ncol ):
+			xx.append(icol)
+			yy.append(irow - 0.5)
+			uu.append( 0 )
+			vv.append( -V[irow,icol] * arrowScale )
 	quiv2 = ax.quiver( xx, yy, uu, vv, color='white', scale=1)
 
 def updateFrame():
@@ -228,6 +228,6 @@ if plotOutput is True:
 for i_anim_step in range(0,nSlices):
 	animStep()
 	if textOutput is True:
-			textDump()
+		textDump()
 	if plotOutput is True:
-			updateFrame()
+		updateFrame()
